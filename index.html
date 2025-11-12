@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sohail Shaikh - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-lg">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="nav-link" aria-label="Toggle theme">🌙</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container-lg">
+            <div class="hero-decor" aria-hidden="true"></div>
+            <div class="row align-items-center min-vh-100">
+                <!-- Left Content -->
+                <div class="col-lg-6 hero-content">
+                    <p class="greeting">Hello, I'm 👋</p>
+                    <h1 class="hero-title">Sohail Shaikh</h1>
+                    <p class="hero-subheading">I craft beautiful web experiences that are fast and accessible.</p>
+                    <p class="hero-subtitle"><span id="typed-text">Full Stack Developer</span><span class="cursor">▎</span></p>
+                    <p class="hero-description">
+                        I'm a passionate developer dedicated to creating beautiful, responsive websites and applications that deliver exceptional user experiences.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-dark btn-lg me-3">Get In Touch</a>
+                        <a href="#projects" class="btn btn-outline-dark btn-lg me-3">Browse Projects</a>
+                        <a href="resume.pdf" download class="btn btn-outline-dark btn-lg">Download Resume</a>
+                    </div>
+                </div>
+
+                <!-- Right Image -->
+                <div class="col-lg-6 text-center">
+                    <div class="profile-image-container">
+            <div class="profile-circle">
+                <img loading="lazy" src="profile.jpg" alt="Sohail Shaikh" class="profile-img">
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section py-5">
+        <div class="container-lg">
+            <h2 class="section-title text-center mb-4">Projects</h2>
+            <p class="section-subtitle text-center mb-5">A few highlights of my recent work — click to view details.</p>
+
+            <div class="project-filters text-center mb-4">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="java">Java</button>
+                <button class="filter-btn" data-filter="training">Training</button>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card" data-tags="web">
+                        <div class="project-thumb">
+                            <img loading="lazy" src="https://via.placeholder.com/600x400?text=Project+1" alt="Project 1" />
+                        </div>
+                        <div class="project-body">
+                            <h3>Project One</h3>
+                            <p class="muted">A responsive web app built with modern JS and a clean UI.</p>
+                            <div class="project-actions mt-3">
+                                <a href="#" class="btn btn-outline-dark">Live</a>
+                                <a href="#" class="btn btn-dark ms-2">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card" data-tags="java">
+                        <div class="project-thumb">
+                            <img loading="lazy" src="https://via.placeholder.com/600x400?text=Project+2" alt="Project 2" />
+                        </div>
+                        <div class="project-body">
+                            <h3>Project Two</h3>
+                            <p class="muted">A Java-based backend service with RESTful APIs.</p>
+                            <div class="project-actions mt-3">
+                                <a href="#" class="btn btn-outline-dark">Live</a>
+                                <a href="#" class="btn btn-dark ms-2">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card" data-tags="training">
+                        <div class="project-thumb">
+                            <img loading="lazy" src="https://via.placeholder.com/600x400?text=Project+3" alt="Project 3" />
+                        </div>
+                        <div class="project-body">
+                            <h3>Project Three</h3>
+                            <p class="muted">A training portal with course content and interactive quizzes.</p>
+                            <div class="project-actions mt-3">
+                                <a href="#" class="btn btn-outline-dark">Live</a>
+                                <a href="#" class="btn btn-dark ms-2">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5">
+        <div class="container-lg">
+            <div class="row align-items-start g-5">
+                <div class="col-lg-6">
+                    <h2 class="section-title">About Me</h2>
+                    <p class="section-subtitle mb-4">Education & Background</p>
+
+                    <div class="education-list">
+                        <div class="edu-item">
+                            <h4>Bachelor of Computer Science</h4>
+                            <p class="muted">University Name — 2018 - 2022</p>
+                            <p class="edu-desc">Focused on software engineering, data structures, algorithms, and web development. Graduated with strong academic performance and completed several team projects.</p>
+                        </div>
+
+                        <div class="edu-item">
+                            <h4>Full Stack Bootcamp</h4>
+                            <p class="muted">Online Bootcamp — 2023</p>
+                            <p class="edu-desc">Intensive full stack training covering React, Node.js, Express, and deployment workflows.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <h2 class="section-title">Skills</h2>
+                    <p class="section-subtitle mb-4">Technologies & Tools I use</p>
+
+                    <div class="skills-grid">
+                        <div class="skill">
+                            <div class="skill-name">HTML/CSS</div>
+                            <div class="skill-bar"><div class="skill-fill" data-fill="95" style="width:0%"></div></div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">JavaScript</div>
+                            <div class="skill-bar"><div class="skill-fill" data-fill="90" style="width:0%"></div></div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">React</div>
+                            <div class="skill-bar"><div class="skill-fill" data-fill="85" style="width:0%"></div></div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Node.js</div>
+                            <div class="skill-bar"><div class="skill-fill" data-fill="80" style="width:0%"></div></div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Java</div>
+                            <div class="skill-bar"><div class="skill-fill" data-fill="75" style="width:0%"></div></div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">SQL</div>
+                            <div class="skill-bar"><div class="skill-fill" data-fill="70" style="width:0%"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-tags mt-4">
+                        <span class="badge">Java</span>
+                        <span class="badge">Data Analyst</span>
+                        <span class="badge">Bloackchain Dev</span>
+                        <span class="badge">DevOps</span>
+                        <span class="badge">Web Developer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-5">
+        <div class="container-lg">
+            <div class="contact-card mx-auto">
+                <div class="contact-header text-center mb-3">
+                    <h2 class="mb-1">Get in Touch</h2>
+                    <p class="muted">You can reach me anytime</p>
+                </div>
+
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <input type="text" name="firstName" id="firstName" class="form-input" placeholder="First name" aria-label="First name" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" name="lastName" id="lastName" class="form-input" placeholder="Last name" aria-label="Last name">
+                        </div>
+                        <div class="col-12">
+                            <div class="input-with-icon">
+                                <span class="icon">✉️</span>
+                                <input type="email" name="email" id="email" class="form-input" placeholder="Your email" aria-label="Email address" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="phone-row">
+                                <select name="country" class="country-select" aria-label="Country code">
+                                    <option value="+91">IN +91</option>
+                                    <option value="+1">US +1</option>
+                                    <option value="+44">UK +44</option>
+                                    <option value="+62">ID +62</option>
+                                </select>
+                                <input type="tel" name="phone" id="phone" class="form-input phone-input" placeholder="Phone number" aria-label="Phone number">
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea name="message" id="message" class="form-input textarea-input" rows="6" placeholder="Tell us what can we help you..." aria-label="Message"></textarea>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-submit">Submit</button>
+                        </div>
+
+                        <div class="col-12 text-center terms muted small mt-2">
+                            By contacting me, you agree to my <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
