@@ -166,6 +166,30 @@ html { scroll-behavior: smooth; }
     opacity: 1;
 }
 
+/* filter buttons */
+.project-filters{ display:flex; gap:12px; justify-content:center; margin-bottom:18px; }
+.filter-btn{ background:transparent; border:1px solid rgba(0,0,0,0.06); padding:8px 14px; border-radius:999px; cursor:pointer; font-weight:700; color:var(--muted); transition: all .22s ease; }
+.filter-btn.active, .filter-btn:hover{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(124,58,237,0.12); }
+
+/* project card hide/visible animations */
+.project-card{ transition: transform .35s ease, opacity .35s ease, filter .35s ease; }
+.project-card.hidden{ opacity:0; transform: scale(.98); filter: blur(2px); pointer-events:none; }
+
+/* skill-fill default: 0 (animated to data-fill via JS) */
+.skill-fill{ width:0% !important; }
+
+/* theme toggle button look */
+#theme-toggle{ background:transparent; border:none; font-size:1.05rem; cursor:pointer; }
+
+/* dark theme */
+body.theme-dark{
+    background:#0b0b0f; color:#e6e6ee;
+}
+body.theme-dark .navbar{ background: rgba(11,11,14,0.85) !important; }
+body.theme-dark .btn-dark{ background:#fff; color:#0b0b0b; }
+body.theme-dark .btn-outline-dark{ color:#e6e6ee; border-color:rgba(255,255,255,0.06); }
+body.theme-dark .project-card{ background:#0f1115; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
 @keyframes blink {
     0% { opacity: 1; }
     50% { opacity: 0; }

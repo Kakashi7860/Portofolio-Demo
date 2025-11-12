@@ -1,51 +1,118 @@
-// Typing animation for the hero subtitle
+// Main interactions: typing, theme toggle, observers, filters, parallax
 document.addEventListener('DOMContentLoaded', function () {
-	const roles = ["Full Stack Developer", "Java Developer", "Technical Trainer"];
-	const typedTextEl = document.getElementById('typed-text');
-	const cursorEl = document.querySelector('.cursor');
+	/* ---------- Theme toggle (persisted) ---------- */
+	const themeToggle = document.getElementById('theme-toggle');
+	const activeTheme = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+	const setTheme = (t) => {
+		if (t === 'dark') document.body.classList.add('theme-dark'); else document.body.classList.remove('theme-dark');
+		localStorage.setItem('theme', t);
+		if (themeToggle) themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
+	};
+	setTheme(activeTheme);
+	if (themeToggle) themeToggle.addEventListener('click', () => setTheme(document.body.classList.contains('theme-dark') ? 'light' : 'dark'));
 
-	let roleIndex = 0;
-	let charIndex = 0;
-	let typing = true;
+	/* ---------- Typing animation with fade between words ---------- */
+	(function typingFade() {
+		const roles = ["Full Stack Developer", "Java Developer", "Technical Trainer"];
+		const typedTextEl = document.getElementById('typed-text');
+		if (!typedTextEl) return;
+		const TYPING_SPEED = 70;
+		const HOLD_DELAY = 1400;
+		let roleIndex = 0;
 
-	const TYPING_SPEED = 80; // ms per char
-	const BACKSPACE_SPEED = 40; // ms per char
-	const HOLD_DELAY = 1500; // how long to keep the full word
-
-	function type() {
-		const current = roles[roleIndex];
-		if (typing) {
-			if (charIndex < current.length) {
-				typedTextEl.textContent += current.charAt(charIndex);
-				charIndex++;
-				setTimeout(type, TYPING_SPEED);
-			} else {
-				// word complete
-				typing = false;
-				setTimeout(type, HOLD_DELAY);
+		function typeWord(word, cb) {
+			let i = 0;
+			typedTextEl.style.opacity = '1';
+			typedTextEl.textContent = '';
+			function step() {
+				if (i < word.length) {
+					typedTextEl.textContent += word.charAt(i++);
+					setTimeout(step, TYPING_SPEED);
+				} else {
+					setTimeout(() => {
+						// fade out, then callback
+						typedTextEl.style.transition = 'opacity 0.45s ease';
+						typedTextEl.style.opacity = '0';
+						setTimeout(() => {
+							typedTextEl.style.opacity = '1';
+							cb();
+						}, 480);
+					}, HOLD_DELAY);
+				}
 			}
-		} else {
-			// backspace
-			if (charIndex > 0) {
-				typedTextEl.textContent = current.substring(0, charIndex - 1);
-				charIndex--;
-				setTimeout(type, BACKSPACE_SPEED);
-			} else {
-				// move to next word
-				roleIndex = (roleIndex + 1) % roles.length;
-				typing = true;
-				setTimeout(type, 200);
-			}
+			step();
 		}
+
+		function next() {
+			const word = roles[roleIndex];
+			typeWord(word, () => {
+				roleIndex = (roleIndex + 1) % roles.length;
+				next();
+			});
+		}
+		next();
+	})();
+
+	/* ---------- Animate skill bars when About enters view ---------- */
+	const skillFills = document.querySelectorAll('.skill-fill');
+	if ('IntersectionObserver' in window && skillFills.length) {
+		const skillsObserver = new IntersectionObserver((entries, obs) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					skillFills.forEach(fill => {
+						const pct = fill.getAttribute('data-fill') || fill.dataset.fill || '0';
+						fill.style.width = pct + '%';
+					});
+					obs.disconnect();
+				}
+			});
+		}, { threshold: 0.25 });
+		const about = document.getElementById('about');
+		if (about) skillsObserver.observe(about);
+	} else {
+		// fallback: set widths immediately
+		skillFills.forEach(fill => { const pct = fill.getAttribute('data-fill') || '0'; fill.style.width = pct + '%'; });
 	}
 
-	// small fade when switching to next role for smoothness
-	function startTyping() {
-		typedTextEl.classList.add('typed-fade');
-		type();
+	/* ---------- Project filtering ---------- */
+	const filterBtns = document.querySelectorAll('.filter-btn');
+	const projectCards = document.querySelectorAll('.project-card');
+	filterBtns.forEach(btn => btn.addEventListener('click', (e) => {
+		const filter = btn.getAttribute('data-filter');
+		filterBtns.forEach(b=>b.classList.remove('active'));
+		btn.classList.add('active');
+		projectCards.forEach(card => {
+			const tags = (card.dataset.tags || '').split(',').map(s=>s.trim());
+			if (filter === 'all' || tags.includes(filter)) {
+				card.classList.remove('hidden');
+			} else {
+				card.classList.add('hidden');
+			}
+		});
+	}));
+
+	/* ---------- Project card reveal on scroll ---------- */
+	if ('IntersectionObserver' in window && projectCards.length) {
+		const cardObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.remove('hidden');
+					entry.target.style.transitionDelay = '0.06s';
+					cardObserver.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.15 });
+		projectCards.forEach(c => cardObserver.observe(c));
 	}
 
-	startTyping();
+	/* ---------- Simple parallax for hero decor ---------- */
+	const heroDecor = document.querySelector('.hero-decor');
+	if (heroDecor) {
+		window.addEventListener('scroll', () => {
+			const y = window.scrollY * 0.08;
+			heroDecor.style.transform = `translateY(${y}px)`;
+		}, { passive: true });
+	}
 });
 
 // Contact form handling: validate and show a success message (no server)
